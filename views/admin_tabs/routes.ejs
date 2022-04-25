@@ -1,0 +1,78 @@
+<div class="dashCont">
+    <div class="cardContDash2 row">
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>ADD</h6>
+                <div class="rec">
+                  <span>Create Record</span>
+                  <a data-toggle="modal" data-target=".bd-example1-modal-lg">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF Routes</h6>
+                <div class="parc">
+                    <span>
+                      <%= routes.length %>
+                    </span>
+                    <i class="fa fa-paper-plane"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="customerTable">
+        <div>
+            The table below shows the all the routes used. Add, Edit or delete any of them.
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% resu.forEach((data)=>{ %>
+                <tr>
+                <th scope="row"> </th>
+                <td><%= data.routeFrom %></td>
+                <td><%= data.routeTo %></td>
+                <td><a href="/admin/pages/delete/route/<%= resu.id %>">Remove</a></td>
+              </tr>
+              <% }) %>
+            </tbody>
+        </table>
+        <!--Modals-->
+        <div class="modal fade bd-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle">Add Record</h4>
+              </div>
+              <form method="post" action="/admin/pages/add/route" class="regform" enctype="application/json">
+                <div class="form-group">
+                  <label>From</label>
+                  <input type="text" name="from" class="form-control">
+                </div>
+              
+                <div class="form-group">
+                  <label>To</label>
+                  <input type="text" name="to" class="form-control">
+                </div>
+          
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

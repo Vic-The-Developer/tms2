@@ -1,0 +1,186 @@
+<div class="dashCont">
+    <div class="cardContDash2 row">
+        <div class="card cardi2">
+          <div class="card-body">
+            <h6>ADD</h6>
+            <div class="rec">
+              <span>Create Record</span>
+              <a data-toggle="modal" data-target=".bd-example1-modal-lg">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF DRIVERS</h6>
+                <div class="parc">
+                    <span>
+                      <%= drivers.length %>
+                    </span>
+                    <i class="fa fa-user-circle-o"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="driverTable">
+        <div>
+            The table below shows the all the drivers. Add, Edit or delete any of them.
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Vehicle</th>
+                <th scope="col">Username</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Picture</th>
+                <th scope="col">License</th>
+                <th scope="col">Status</th>
+                <th scope="col">Alter</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% drivers.forEach((data)=>{ %>
+                <tr>
+                <th scope="row"> </th>
+                <td><%= data.driverID %></td>
+                <td><%= data.plate %></td>
+                <td><%= data.username %></td>
+                <td><%= data.firstname %></td>
+                <td><%= data.lastname %></td>
+                <td><%= data.DOB %></td>
+                <td><img src="/<%= data.photo %>" alt="profile" width="25px" height="25px"></td>
+                <td><%= data.licence %></td>
+                <td><%= data.status %></td>
+                <td>
+                  <a data-toggle="modal" data-target=".bd-example2-modal-lg">Edit</a>
+                </td>
+                <td>
+                  <a href="/admin/pages/delete/driver/<%= data.driverID %>">Delete</a>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+        </table>
+        <!--Modals-->
+        <div class="modal fade bd-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle">Add Record</h4>
+              </div>
+              <form method="post" action="/admin/pages/add/driver" class="regform" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label>Firstname</label>
+                  <input type="text" name="fName" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>Lastname</label>
+                  <input type="text" name="lName" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" name="username" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>Date of Birth</label>
+                  <input type="date" name="dob" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>Profile</label>
+                  <input type="file" name="pic" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="preview(this)" required>
+                  <img id="prev" src="" alt="preview" height="100px" width="100px"/>
+                </div>
+      
+                <div class="form-group">
+                  <label>Plate</label>
+                  <input list="to" id="plate" name="plate" class="form-control">
+                  <datalist id="plate">
+                    <option value="Request from db">
+                  </datalist>
+                </div>
+
+                <div class="form-group">
+                  <label>Status</label>
+                  <select class="form-select" aria-label="Default select example" name="status">
+                    <option selected>Choose status</option>
+                    <option value="available">Confirmed</option>
+                    <option value="leave">On Way</option>
+                  </select>
+                </div>
+            
+                <button type="submit" class="btn btn-default">Add</button>
+              </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade bd-example2-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle">Edit Details</h4>
+              </div>
+              <form method="post" action="/admin/pages/edit/drivers" class="regform" enctype="application/json">
+                <div class="form-group">
+                  <label>Driver ID(existing)</label>
+                  <input type="number" name="driverID" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>Number plate</label>
+                  <input type="text" name="plate" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" name="username" class="form-control">
+                </div>
+            
+                <div class="form-group">
+                  <label>Firstname</label>
+                  <input type="text" name="fName" class="form-control">
+                </div>
+      
+                <div class="form-group">
+                  <label>Lastname</label>
+                  <input type="text" name="lName" class="form-control">
+                </div>
+            
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<script>
+  function preview(input){
+      var file = $("input[type=file]").get(0).files[0];
+      if(file){
+          var reader = new FileReader();
+
+          reader.onload = function(){
+              $("#prev").attr("src", reader.result);
+          }
+
+          reader.readAsDataURL(file);
+      }
+  }
+</script>

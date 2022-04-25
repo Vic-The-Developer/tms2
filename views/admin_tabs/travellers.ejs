@@ -1,0 +1,77 @@
+<div class="dashCont">
+    <div class="cardContDash row">
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF TRAVELLERS</h6>
+                <div class="parc">
+                    <span>
+                        <%= travellers.length %>
+                    </span>
+                    <i class="fa fa-users"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>CHECKED TOTAL</h6>
+                <div class="parc">
+                    <span>
+                        <%= checked %>
+                    </span>
+                    <i class="fa fa-check-square-o"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>UNCHECKED TOTAL</h6>
+                <div class="parc">
+                    <span>
+                        <%= unchecked %>
+                    </span>
+                    <i class="fa fa-times-circle-o"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="customerTable">
+        <div>
+            The table below shows the all the travellers. Add, Edit or delete any of them.
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Time</th>
+                <th scope="col">Ticket</th>
+                <th scope="col">Status</th>
+                <th scope="col">Plate</th>
+                <th scope="col">Check</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% travellers.forEach((data)=>{ %>
+                   <tr>
+                        <th scope="row"> </th>
+                        <td><%= data.customerID %></td>
+                        <td><%= data.from %></td>
+                        <td><%= data.to %></td>
+                        <td><%= data.arrival %></td>
+                        <td><%= data.ticketNumber %></td>
+                        <td><%= data.status %></td>
+                        <td><%= data.plate %></td>
+                        <td><a href="/admin/pages/check/traveller/<%= data.ticketNumber %>">Check</a></td>
+                        <td>
+                            <a href="/admin/pages/delete/traveller/<%= data.ticketNumber %>">Delete</a>
+                        </td>
+                    </tr> 
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

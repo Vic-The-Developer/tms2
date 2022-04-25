@@ -1,0 +1,649 @@
+<%- include('../_layouts/header.ejs') %>
+
+<main role="main" class="accSec">
+    <div class="prof">      
+        <div class="portlet light profile-sidebar-portlet bordered">
+            <div class="profile-userpic">
+                <img class="profImg" src="<%= user[0].photo %>">
+            </div>
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name"> <%= user[0].username %> </div>
+                <div class="profile-usertitle-job"> #ID: <%= user[0].customerID %> </div>
+            </div>
+            <div class="profile-userbtns">
+
+                <a class="btn btn-info  btn-sm" data-toggle="modal" data-target="#editprof">
+                    Edit Profile
+                </a>
+                <br/><br/>
+                <a class="btn btn-info  btn-sm" data-toggle="modal" data-target="#delAcc">
+                    Delete account
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Edit profile Modal -->
+    <div class="modal fade" id="editprof" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Edit Profile</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/user/edit/profile" class="regform" enctype="application/json">
+
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input type="text" name="fName" class="form-control" value="<%= user[0].firstname %>">
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input type="text" name="lName" class="form-control" value="<%= user[0].lastname %>">
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="email" class="form-control" value="<%= user[0].email %>" disabled>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" value="<%= user[0].username %>">
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Enter phone number</label>
+                            <input type="text" name="phoneNumber" class="form-control"  value="<%= user[0].phonenumber %>">
+                        </div>
+                    
+                        <button type="submit" class="btn btn-default">Update</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Account Modal -->
+    <div class="modal fade" id="delAcc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    Delete Account
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <b>
+                            This action CANNOT be reversed! You still wish to proceed or cancel?
+                        </b>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <a href="/user/delete/profile/<%= user[0].customerID %>" class="btn btn-danger">
+                    Delete
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="album py-5 bg-light accServices">
+        <h3 class="card-header">Services</h3>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="/images/courier.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">
+                      <h5><b>Courier services</b></h5>
+                      <div>
+                        Get your parcels delivered within 48 hours of confirmation. You will receive a mail once your parcel gets to your destination.
+                      </div>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#parcels">
+                            Fill form
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="/images/bus booking.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">
+                      <h5><b>Travel booking</b></h5>
+                      <div>
+                          Travel in style with our top notch world class travelling couches. With comfortable seats, free WiFi and endless entertaiment to give your a memorable trip.
+                      </div>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#travel">
+                            Fill form
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="/images/car hire.gif" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">
+                      <h5>
+                          <b>Car Hire</b>
+                      </h5>
+                      <div>
+                        Book our reliable cars to move to any place in the country. our vehicles and serviced regularly to ensure your travelling is without issues.
+                      </div>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#carHire">
+                            Fill form
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Travel Modal -->
+    <div class="modal fade" id="travel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Travel Booking</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/users/bus/booking" class="regform" enctype="application/json">
+
+                        <div class="form-group">
+                            <label>User ID</label>
+                            <input type="number" name="customerID" class="form-control" value="<%= user[0].customerID %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>From</label>
+                            <input list="from" id="from" name="from" class="form-control">
+                            <datalist id="from">
+                                <% routes.forEach((data)=>{ %>
+                                    <option value="<%= data %>"></option>
+                                <% }) %>
+                            </datalist>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>To</label>
+                            <input list="to" id="to" name="to" class="form-control">
+                            <datalist id="to">
+                                <% routes.forEach((data)=>{ %>
+                                    <option value="<%= data %>"></option>
+                                <% }) %>
+                            </datalist>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" name="date" class="form-control">
+                        </div>
+                    
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Parcels form Modal -->
+    <div class="modal fade" id="parcels" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Parcel delivery</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/users/parcel/delivery" class="regform" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Customer ID</label>
+                            <input type="number" name="customerID" class="form-control" value="autofill">
+                        </div>
+                      
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" value="autofill">
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>From</label>
+                            <input list="from" id="routelist" name="from" class="form-control">
+                            <datalist id="from">
+                                <% routes.forEach((data)=>{ %>
+                                    <option value="<%= data %>"></option>
+                                <% }) %>
+                            </datalist>
+                        </div>
+    
+                        <div class="form-group">
+                            <label>To</label>
+                            <input list="to" id="routelist" name="to" class="form-control">
+                            <datalist id="to">
+                                <% routes.forEach((data)=>{ %>
+                                    <option value="<%= data %>"></option>
+                                <% }) %>
+                            </datalist>
+                        </div>
+    
+                        <div class="form-group">
+                            <label>Photo</label>
+                            <input type="file" name="pic" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="preview(this)" required>
+                            <img id="prev" src="" alt="preview" height="100px" width="100px"/>
+                        </div>
+                  
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Car Hire Modal -->
+    <div class="modal fade" id="carHire" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    Car/Bus Hire
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Visit our station to book a vehicle with us :)</h4>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="container tracking">
+        <h3>Services tracking</h3>
+        <div class="containerTbls border-right">
+            <h4 class="card-header">Parcels</h4>
+
+            <% if (parcel) { %>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Receipt</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% parcel.forEach((data)=>{ %>
+                            <tr>
+                                <th scope="row"> </th>
+                                <td><%= data.receiptId %></td>
+                                <td><%= data.status %></td>
+                                <td><a data-toggle="modal" data-target="#<%= data.receiptId %>">View</a></td>
+                            </tr>  
+                        <% }) %>
+                      
+                    </tbody>
+                </table>
+                <!-- Parcel Tracking Modal -->
+                <% parcel.forEach((data)=>{ %>
+                    <div class="modal fade" id="<%= data.receiptId %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">
+                                    Details
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <article class="cardTr">
+                                        <header class="card-header">Tracking </header>
+                                        <div class="card-body">
+                                            <h6>Receipt: <%= data.receiptId %></h6>
+                                            <article class="cardTr">
+                                                <div class="card-body accRow row">
+                                                    <div class="col-sm"> <strong>Est. Delivery time:</strong> <br>48 Hours after confirmation </div>
+                                                    <div class="col-sm"> <strong>Shipping BY:</strong> <br> Top Trans LTD. </div>
+                                                    <div class="col-sm"> <strong>Status: <%= data.status %></strong> <br>  </div>
+                                                </div>
+                                            </article>
+                                            <div class="track">
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                                                <% if(data.parcel==='pickup') { %>
+                                                  <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>  
+                                                <% } else { %>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
+                                                <% }%>
+                                            </div>
+                                            <hr>
+                                            <span class="row">
+                                                <h5>Make payment</h5><br/>
+                                                <div id='mpesaButton' class="mpesaButtons" data-phone='<%= user[0].phonenumber %>' data-amount=1000 data-url='/users/mpesa/pay'></div>
+                                            </span>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p class="lead accLead text-muted">
+                    You dont have any pending parcels.
+                </p>
+            <% } %>
+        </div>
+        <div class="containerTbls border-right">
+            <h4 class="card-header">Travelling</h4>
+
+            <% if(traveller) { %>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Ticket</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% traveller.forEach((data)=>{ %>
+                           <tr>
+                                <th scope="row"> </th>
+                                <td><%= data.ticketNumber %></td>
+                                <td><%= data.arrival %></td>
+                                <td><a data-toggle="modal" data-target="#<%= data.ticketNumber %>">View</a></td>
+                            </tr> 
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% }else{ %>
+                <p class="lead accLead text-muted">
+                    You don't have any travel bookings.
+                </p>
+            <% } %>
+
+            <!-- Travel Tracking Modal -->
+            <% traveller.forEach((data)=>{ %>
+                <div class="modal fade" id="<%= data.ticketNumber %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">
+                                Details
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <article class="card">
+                                    <header class="card-header">Tracking </header>
+                                    <div class="card-body">
+                                        <h6>Customer ID: <%= data.customerID %></h6>
+                                        <article class="card">
+                                            <div class="card-body accRow row">
+                                                <div class="col"> <strong>Departure time:</strong> <br><%= data.arrival %></div>
+                                                <div class="col"> <strong>Number plate:</strong> <br> KAA.124 </div>
+                                                <div class="col"> <strong>Status:</strong> <br> <%= data.status %> </div>
+                                                <div class="col"> <strong>Receipt #:</strong> <br> <%= data.ticketNumber %> </div>
+                                            </div>
+                                        </article>
+                                        <div class="track">
+                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Pending</span> </div>
+                                            <% if(data.status==='on board') { %>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">On-board</span> </div>
+                                            <% } else { %>
+                                                <div class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">On-board</span> </div>
+                                            <% } %>
+                                            
+                                            <% if(data.status==='arrived') { %>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-bus"></i> </span> <span class="text"> Arrived </span> </div>
+                                            <% } else{ %>
+                                                <div class="step"> <span class="icon"> <i class="fa fa-bus"></i> </span> <span class="text"> Arrived </span> </div>
+                                            <% } %>
+                                            
+                                        </div>
+                                        <hr>
+                                        <span class="row">
+                                            <h5>Make payment</h5><br/>
+                                            <div class='mpesaButtons' data-phone='<%= user[0].phonenumber %>' data-amount=3000 data-url='/users/mpesa/pay'></div>
+                                        </span>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           <% }) %>
+        </div>
+        <div class="containerTbls border-right">
+            <h4 class="card-header">Car/Bus Hire</h4>
+
+            <% if(carHire===undefined || carHire===null){ %>
+                <p class="lead accLead text-muted">
+                    You don't have any booked vehicles.
+                </p>
+            <% } else{ %>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Expiry</th>
+                        <th scope="col">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% carHire.forEach((data)=>{ %>
+                          <tr>
+                                <th scope="row"> </th>
+                                <td><%= data.customerID %></td>
+                                <td><%= data.due %></td>
+                                <td><a data-toggle="modal" data-target="#<%= data.receipt %>">View</a></td>
+                            </tr>  
+                        <% }) %>
+                      
+                    </tbody>
+                </table>
+            <% } %>
+
+            <!--Car Hire Modal -->
+            <% carHire.forEach((data)=>{ %>
+                <div class="modal fade" id="<%= data.receipt %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">
+                                Details
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <article class="card">
+                                    <header class="card-header">Tracking </header>
+                                    <div class="card-body">
+                                        <h6>Tracking ID: <%= data.receipt %></h6>
+                                        <article class="card">
+                                            <div class="card-body accRow row">
+                                                <div class="col"> <strong>Expiry time:</strong> <br><%= data.due %> </div>
+                                                <div class="col"> <strong>Number Plate:</strong> <br> <%= data.plate %> </div>
+                                                <div class="col"> <strong>Make:</strong> <br> <%= data.make %>,<%= data.type %> </div>
+                                                <div class="col"> <strong>Receipt #:</strong> <br> <%= data.receipt %> </div>
+                                            </div>
+                                        </article>
+                                        <div class="track">
+                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Confirmed</span> </div>
+                                            <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> On Use</span> </div>
+                                            <% if(data.checked==='checked'){ %>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-car"></i> </span> <span class="text"> Returned </span> </div>
+                                            <% } else{ %>
+                                                <div class="step"> <span class="icon"> <i class="fa fa-car"></i> </span> <span class="text"> Returned </span> </div>
+                                            <% } %>
+                                            
+                                        </div>
+                                        <hr>
+                                        <span class="row">
+                                            <h5>Make payment</h5><br/>
+                                            <div class='mpesaButtons' data-phone='<%= user[0].phonenumber %>' data-amount=5000 data-url='/users/mpesa/pay'></div>
+                                        </span>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</main>
+<script>
+    var button = document.querySelectorAll(".mpesaButtons");
+
+    if (button !== null) {
+        document.head.insertAdjacentHTML('beforeend', '<link rel=stylesheet href="https://cdn.jsdelivr.net/gh/muaad/mpesa_button@master/styles/style.css">');
+        img = '<img style="width: 35px; display: inline; margin: -8px;" src= "https://cdn.jsdelivr.net/gh/muaad/mpesa_button@master/images/mpesa.png">'
+        btnMarkup = '<a href="" id="mpesaBtn" class="mpesaButton">' + img + '<span style="margin-left: 15px;">Pay with Mpesa</span></a>'
+        phoneInstruction = '<strong><em>We will send an Mpesa payment request to this phone number</em></stron>'
+        form = '<form>\
+            <label for="amount" class="mpesaLabel">Amount</label><input class="mpesaInput" type="number" placeholder="2000" name="phone" id="mpesaAmount"></input><br>\
+            <label for="phone" class="mpesaLabel">Phone Number</label><input class="mpesaInput" type="text" placeholder="254722123456" name="phone" id="mpesaPhoneNumber"></input><br>' + phoneInstruction + '<br><br><button href="" id="mpesaSend" class="mpesaButton" style="width: 100%;">' + img + '<span style="margin-left: 15px;">Pay</span></button></form>'
+        formMarkup = '<div id="mpesaForm"><h3 class="mpesaHeader">Pay With Mpesa</h3>' + form + '</div>'
+        button.forEach((data)=>{
+            data.innerHTML = btnMarkup
+        })
+
+        success = '<div style="text-align: center;" class="animate-bottom">\
+        <h2>√ Success</h2>\
+        <p>An Mpesa payment request will be sent to your phone shortly</p>\
+        </div>'
+
+        button.forEach((data)=>{
+            data.addEventListener('click', function (e) {
+                e.preventDefault();
+                formDiv = document.createElement('div')
+                data.parentNode.insertBefore(formDiv, data.nextSibling);
+                formDiv.innerHTML = formMarkup
+                amountInput = document.getElementById("mpesaAmount")
+                phoneInput = document.getElementById("mpesaPhoneNumber")
+                phone = data.getAttribute('data-phone')
+                amount = data.getAttribute('data-amount')
+                url = data.getAttribute('data-url')
+                amountInput.value = amount
+                phoneInput.value = phone
+                data.style.display = 'none';
+    
+                payButton = document.getElementById("mpesaSend")
+                loaderDiv = document.createElement('div')
+                loaderDiv.setAttribute("id", "loader");
+                payButton.parentNode.insertBefore(loaderDiv, payButton.nextSibling);
+                loader = document.getElementById("loader")
+                loader.style.display = "none";
+                loader.style.margin = '-75px 0 0 -110px';
+    
+                payButton.addEventListener('click', function (evt) {
+                    evt.preventDefault();
+                    payButton.disabled = true;
+                    document.getElementById('mpesaPhoneNumber').disabled = true;
+                    formDiv = document.getElementById('mpesaForm')
+                    if (url !== undefined) {
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.open("POST", url, true);
+                        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhttp.send('phone=' + phoneInput.value + '&amount=' + amountInput.value);
+                        xhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200) {
+                                formDiv.innerHTML = success
+                            }
+                            else {
+                                formDiv.innerHTML = 'Something went wrong. Contact website developer. Error: "We could not POST to the URL specified!"'
+                            }
+                        };
+                    } else {
+                        setTimeout(function () {
+                            formDiv.innerHTML = 'Something went wrong. Contact website developer. Error: "No URL specified!"'
+                        }, 3000); 
+                    }
+                    loader.style.display = "";
+                })
+            })
+        })
+    }
+</script>
+
+<%- include('../_layouts/footer.ejs') %>

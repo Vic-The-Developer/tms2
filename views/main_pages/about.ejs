@@ -1,0 +1,33 @@
+<%- include('../_layouts/header.ejs') %>
+
+<div class="cover">
+  <div class="contCover">
+    <p class="cover-heading">
+      <span>Easy </span>
+      <span>Coach LTD</span>
+    </p>
+    <p class="lead" id="lead">
+      
+    </p>
+    <p class="lead">
+      <a href="/services" class="btn btn-lg btn-secondary">See more</a>
+    </p>
+  </div>
+</div>
+<script>
+  var i = 0;
+  var txt = 'Our central goal is to help make transportation and delivery simpler for our clients. We endeavor to be a pioneer in same-day and last mile delivery by cooperating with the best groups and transportation authorities. The administration group energizes vocation development and persuades the enterprising spirits of our accomplices to succeed and go after greatness.';
+  var speed = 40;
+
+  (
+    function typeWriter() {
+      if (i < txt.length) {
+        document.getElementById("lead").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+  )();
+</script>
+
+<%- include('../_layouts/footer.ejs') %>

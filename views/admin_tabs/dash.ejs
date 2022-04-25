@@ -1,0 +1,290 @@
+<div class="dashCont">
+  <div class="cardContDash row">
+    <div class="card cardi">
+      <div class="card-body">
+        <h6>PARCELS TODAY</h6>
+        <div class="num">
+          <span>
+            <%= parcels.length %>
+        </span> <i class="fa fa-th-large"></i></div>
+      </div>
+    </div>
+    <div class="card cardi">
+      <div class="card-body">
+        <h6>DRIVERS</h6>
+        <div class="num">
+          <span>
+            <%= drivers.length %>
+          </span> <i class="fa fa-user-circle-o"></i></div>
+      </div>
+    </div>
+    <div class="card cardi">
+      <div class="card-body">
+        <h6>COMPLETED</h6>
+        <div class="num">
+          <span><%= complete %>%</span>
+          <i class="fa fa-clipboard"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="graphCont">
+    <div class="card barGraph">
+      <div class="card-header">
+        Revenue
+      </div>
+        <div class="card-body">
+          <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        </div>
+    </div>
+  
+    <div class="card pieGraph">
+      <div class="card-header">Statistics</div>
+      <div class="card-body">
+        <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="graphCont2">
+    <div class="cardContDash4 row">
+      <div class="card cardi3">
+        <div class="card-body">
+          <h6>ADD MONTHLY EXPENSES</h6>
+          <div class="num">
+            <span>Insert Figures</span>
+            <a data-toggle="modal" data-target=".bd-example1-modal-lg">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card cardi3">
+        <div class="card-body">
+          <h6>ADD TRIP EXPENSES</h6>
+          <div class="num">
+            <span>Insert Figures</span>
+            <a data-toggle="modal" data-target=".bd-example2-modal-lg">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card cardi3">
+        <div class="card-body">
+          <h6>NET REVENUE</h6>
+          <div class="num">
+            <!--red if its loss, green if its profit-->
+            <span id="netRev" style="font-weight: bold">
+              
+            </span>
+            <i class="fa fa-line-chart"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card lineGraph">
+      <div class="card-header">COSTS</div>
+      <div class="card-body">
+        <canvas id="myChart3" style="width:100%;max-width:600px"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modals-->
+<!--Month expense modal-->
+<div class="modal fade bd-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Enter Expenses</h4>
+      </div>
+      <form method="post" action="/admin/pages/monthly" class="regform" enctype="application/json">
+        <div class="form-group">
+          <label>Choose month</label>
+          <input type="date" name="month" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label>Taxes</label>
+          <input type="number" name="tax" class="form-control" placeholder="800000">
+        </div>
+    
+        <div class="form-group">
+          <label>Insurance</label>
+          <input type="number" name="insurance" class="form-control" placeholder="70000">
+        </div>
+
+        <div class="form-group">
+          <label>Vehicle purchase</label>
+          <input type="number" name="vehicle" class="form-control" placeholder="50000000">
+        </div>
+    
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <div class="modal-footer">
+        <a class="btn btn-primary" href="#">Delete Entry</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Trip Expenses modal-->
+<div class="modal fade bd-example2-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Enter trip expenses</h4>
+      </div>
+      <form method="post" action="/admin/pages/trip" class="regform" enctype="application/json">
+        <div class="form-group">
+          <label>Choose date</label>
+          <input type="date" name="month" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label>Fuel</label>
+          <input type="number" name="fuel" class="form-control" placeholder="30000">
+        </div>
+
+        <div class="form-group">
+          <label>Maintainance</label>
+          <input type="number" name="maintainance" class="form-control" placeholder="70000">
+        </div>
+
+        <div class="form-group">
+          <label>Miscellaneous e.g lodging,meals</label>
+          <input type="number" name="misc" class="form-control" placeholder="8000">
+        </div>
+
+        <div class="form-group">
+          <label>Parking fees & tolls</label>
+          <input type="number" name="tolls" class="form-control" placeholder="50000">
+        </div>
+    
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  var totalRev = ['<%= revenueAmount %>'];
+  var totalExp = '<%= tripAmt %>';
+
+    //Bar Graph
+
+    var revMths = ['<%= revenueMonth %>'];
+    var revAmnt = ['<%= revenueAmount %>',0];
+    
+    var barColors = ["red", "green","blue","orange","brown",'yellow','grey'];
+    
+    new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: revMths.toString().split(','),
+        datasets: [{
+          backgroundColor: barColors,
+          data: revAmnt.toString().split(','),
+          barThickness: 3,
+        }]
+      },
+      options: {
+        legend: {display: false},
+        title: {
+          display: true,
+          text: "Revenue 2022"
+        }
+      }
+    });
+</script>
+<script>
+    //Doughnut Graph
+    var xValues = ["Car Hire", "Parcels", "Travellers"];
+    var yValues = ['<%= carHire.length %>', '<%= parcels.length %>', '<%= travellers.length %>'];
+    var barColors = [
+      "#b91d47",
+      "#00aba9",
+      "#2b5797"
+    ];
+    
+    new Chart("myChart2", {
+      type: "doughnut",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Total statistics"
+        }
+      }
+    });
+</script>
+<script>
+    //Line Graph
+    var xValues = ["Jan","Feb","March","April"];
+
+    var tripMnt = '<%= tripMth %>';
+    var triAmt = '<%= tripAmt %>';
+    var monthExpA = '<%= monthExpA %>';
+
+    var tripAmt2 ;
+    var monthExpA2;
+
+    var x = triAmt.toString().split(',');
+    var y = monthExpA.toString().split(',');
+
+    
+
+    var expenses ={
+      month: Number(x[x.length-1]),
+      trip: Number(y[y.length-1]),
+      total: function(){
+        return this.trip+this.month
+      }
+    }
+    var totalRev2 = '<%= revenueAmount %>'.toString().split(',');
+
+
+    var net = (Number(totalRev2[totalRev2.length-1]) - expenses.total());
+    var elem = document.getElementById('netRev');
+    if(net>0){
+      elem.innerHTML = net;
+      elem.style.color = 'green'
+    }else{
+      elem.innerHTML = net;
+      elem.style.color = 'red';
+    }
+    
+    new Chart("myChart3", {
+      type: "line",
+      data: {
+        labels: tripMnt.toString().split(','),
+        datasets: [{ 
+          data: triAmt.toString().split(','),
+          borderColor: "green",
+          fill: false,
+          label: 'Trip Expenses'
+        },
+        {
+          data: monthExpA.toString().split(','),
+          borderColor: "red",
+          fill: false,
+          label: 'Monthly Expenses'
+        }]
+      },
+      options: {
+        legend: {display: true}
+      }
+    });
+
+</script>

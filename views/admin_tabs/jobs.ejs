@@ -1,0 +1,189 @@
+<div class="dashCont">
+    <div class="cardContDash row">
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>ADD</h6>
+                <div class="rec">
+                    <span>Create Record</span>
+                    <a data-toggle="modal" data-target=".bd-example1-modal-lg">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF PARCELS</h6>
+                <div class="parc">
+                    <span><%= parcels.length %></span>
+                    <i class="fa fa-th-large"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>COMPLETED</h6>
+                <div class="num">
+                    <span><%= complete %>%</span>
+                    <i class="fa fa-clipboard"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jobTable">
+        <div>
+            The table below shows the parcels to be delivered. Assign each to the designated vehicles moving to that route.
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">CustomerID</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Status</th>
+                <th scope="col">Vehicle</th>
+                <th scope="col">Receipt</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% parcels.forEach((data)=>{ %>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><%= data.customerId %></td>
+                        <td><img src="/<%= data.photo %>" alt="pic" width="30px" height="30px"></td>
+                        <td><%= data.routeTo %></td>
+                        <td><%= data.status %></td>
+                        <% if(data.vehicle){ %>
+                            <td><%= data.vehicle %></td>
+                        <% } else{ %>
+                            <td><a data-toggle="modal" data-target=".bd-example2-modal-lg">Edit</a></td>
+                        <% } %>
+                        <td><%= data.receiptId %></td>
+                        <td>
+                            <a href="/admin/pages/delete/job/<%= data.receiptId %>">Delete</a>
+                        </td>
+                      </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <!--Modals-->
+        <div class="modal fade bd-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLongTitle">Add Record</h4>
+                </div>
+                <form method="post" action="/admin/pages/add/jobs" class="regform" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Customer ID</label>
+                        <input type="number" name="customerID" class="form-control">
+                    </div>
+                  
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+              
+                    <div class="form-group">
+                        <label>From</label>
+                        <input list="from" id="routelist" name="from" class="form-control">
+                        <datalist id="from">
+                            <option value="Request from db">
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label>To</label>
+                        <input list="to" id="routelist" name="to" class="form-control">
+                        <datalist id="to">
+                            <option value="Request from db">
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Picture</label>
+                        <input type="file" name="pic" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="preview(this)" required>
+                        <img id="prev" src="" alt="preview" height="100px" width="100px"/>
+                    </div>
+        
+                    <div class="form-group">
+                        <label>Plate</label>
+                        <input list="to" id="plate" name="plate" class="form-control">
+                        <datalist id="plate">
+                            <option value="Request from db">
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-select" aria-label="Default select example" name="status">
+                            <option selected>Choose status</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="on way">On Way</option>
+                            <option value="pick up">Pick up</option>
+                        </select>
+                    </div>
+              
+                    <button type="submit" class="btn btn-default">Add</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example2-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Change status</h4>
+                </div>
+                <form method="post" action="/admin/pages/job/status" class="regform" enctype="application/json">
+                    <div class="form-group">
+                        <label>Receipt ID</label>
+                        <input type="text" name="receipt" class="form-control" >
+                    </div>
+
+                    <div class="form-group">
+                        <input type="radio" name="status" class="form-control" value="confirmed">
+                        <label>confirmed</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="radio" name="status" class="form-control" value="on way">
+                        <label>On way</label>
+                    </div>
+            
+                    <div class="form-group">
+                        <input type="radio" name="status" class="form-control" value="pickup">
+                        <label>Pick up</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Update</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function preview(input){
+        var file = $("input[type=file]").get(0).files[0];
+        if(file){
+            var reader = new FileReader();
+ 
+            reader.onload = function(){
+                $("#prev").attr("src", reader.result);
+            }
+ 
+            reader.readAsDataURL(file);
+        }
+    }
+</script>

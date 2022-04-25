@@ -1,0 +1,34 @@
+<%- include('../_layouts/header.ejs') %>
+
+<h1><%= title %></h1>
+
+<form method="post" action="/users/profile" class="regform" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label>First name</label>
+        <input type="file" name="pic" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="preview(this)" required>
+        <img id="prev" src="" alt="preview" height="100px" width="100px"/>
+    </div>
+
+    <div class="form-group">
+        <input type="hidden" name="email" class="form-control" value="<%= email %>" >
+    </div>
+
+    <button type="submit" class="btn btn-default">Register</button>
+</form>
+<script>
+    function preview(input){
+        var file = $("input[type=file]").get(0).files[0];
+        if(file){
+            var reader = new FileReader();
+ 
+            reader.onload = function(){
+                $("#prev").attr("src", reader.result);
+            }
+ 
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+<%- include('../_layouts/footer.ejs') %>

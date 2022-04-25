@@ -1,0 +1,122 @@
+<div class="dashCont">
+    <div class="cardContDash row">
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>ADD</h6>
+                <div class="rec">
+                    <span>Create Record</span>
+                    <a data-toggle="modal" data-target=".bd-example1-modal-lg">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF VEHICLES</h6>
+                <div class="parc">
+                    <span>
+                        <%= vehicles.length %>
+                    </span>
+                    <i class="fa fa-car"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF BUSES</h6>
+                <div class="num">
+                    <span>
+                        <%= bus %>
+                    </span>
+                    <i class="fa fa-bus"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jobTable">
+        <div>
+            The table below shows the parcels to be delivered. Assign each to the designated vehicles moving to that route.
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">CustomerID</th>
+                <th scope="col">Make</th>
+                <th scope="col">Type</th>
+                <th scope="col">Due</th>
+                <th scope="col">Plate</th>
+                <th scope="col">Receipt</th>
+                <th scope="col">Check</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% carHire.forEach((data)=>{ %>
+                  <tr>
+                        <th scope="row"> </th>
+                        <td><%= data.customerID %></td>
+                        <td><%= data.make %></td>
+                        <td><%= data.type %></td>
+                        <td><%= data.due %></td>
+                        <td><%= data.plate %></td>
+                        <td><%= data.receipt %></td>
+                        <% if(data.checked){ %>
+                            <td><%= data.checked %></td>
+                        <% } else { %>
+                            <td><a href="/admin/pages/hire/check/<%= data.plate %>">Check</a></td>
+                        <% } %>
+                        <td><%= data.pay %></td>
+                        <td>
+                            <a href="/admin/pages/hire/delete/<%= data.plate %>">Delete</a>
+                        </td>
+                    </tr>  
+                <% }) %>
+            </tbody>
+        </table>
+        <!--Modals-->
+        <div class="modal fade bd-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLongTitle">Add Record</h4>
+                </div>
+                <form method="post" action="/admin/pages/add/hire" class="regform" enctype="application/json">
+                    <div class="form-group">
+                        <label>Customer ID</label>
+                        <input type="number" name="customerID" class="form-control">
+                    </div>
+                  
+                    <div class="form-group">
+                        <label>Make</label>
+                        <input type="text" name="make" class="form-control">
+                    </div>
+              
+                    <div class="form-group">
+                        <label>Type</label>
+                        <input type="text" name="type" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Due</label>
+                        <input type="date" name="due" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Plate</label>
+                        <input type="text" name="plate" class="form-control">
+                    </div>
+              
+                    <button type="submit" class="btn btn-default">Add</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

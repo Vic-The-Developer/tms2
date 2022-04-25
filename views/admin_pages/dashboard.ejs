@@ -1,0 +1,106 @@
+<%- include('../_layouts/header.ejs') %>
+
+<div class="dashwrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Dashboard</h3>
+            <strong>ADMIN</strong>
+        </div>
+
+        <ul  class="nav nav-pills sideCont">
+			<li class="active">
+                <a  href="#1b" data-toggle="tab">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+			</li>
+			<li>
+                <a href="#2b" data-toggle="tab">
+                    <i class="fa fa-briefcase"></i> Jobs
+                </a>
+			</li>
+			<li>
+                <a href="#3b" data-toggle="tab">
+                    <i class="fa fa-user-circle-o"></i> Drivers
+                </a>
+			</li>
+  		    <li>
+                <a href="#4b" data-toggle="tab">
+                    <i class="fa fa-bus"></i> Vehicles
+                </a>
+			</li>
+  		    <li>
+                <a href="#5b" data-toggle="tab">
+                    <i class="fa fa-users"></i> Customers
+                </a>
+			</li>
+  		    <li>
+                <a href="#6b" data-toggle="tab">
+                    <i class="fa fa-suitcase"></i> Travellers
+                </a>
+			</li>
+  		    <li>
+                <a href="#7b" data-toggle="tab">
+                    <i class="fa fa-car"></i> Car Hire
+                </a>
+			</li>
+  		    <li>
+                <a href="#8b" data-toggle="tab">
+                    <i class="fa fa-paper-plane"></i> Routes
+                </a>
+			</li>
+		</ul>
+
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Sidebar</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+    <!--Tab content-->
+    <div class="tab-content clearfix">
+        <div class="tab-pane active" id="1b">
+            <%- include('../admin_tabs/dash.ejs') %>
+        </div>
+        <div class="tab-pane" id="2b">
+            <%- include('../admin_tabs/jobs.ejs') %>
+        </div>
+        <div class="tab-pane" id="3b">
+            <%- include('../admin_tabs/drivers.ejs') %>
+        </div>
+        <div class="tab-pane" id="4b">
+            <%- include('../admin_tabs/vehicles.ejs') %>
+        </div>
+        <div class="tab-pane" id="5b">
+            <%- include('../admin_tabs/customers.ejs') %>
+        </div>
+        <div class="tab-pane" id="6b">
+            <%- include('../admin_tabs/travellers.ejs') %>
+        </div>
+        <div class="tab-pane" id="7b">
+            <%- include('../admin_tabs/carHire.ejs') %>
+        </div>
+        <div class="tab-pane" id="8b">
+            <%- include('../admin_tabs/routes.ejs') %>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    
+    });
+</script>
+
+<%- include('../_layouts/footer.ejs') %>

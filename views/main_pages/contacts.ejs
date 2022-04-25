@@ -1,0 +1,41 @@
+<%- include('../_layouts/header.ejs') %>
+
+<div>
+    <div class="contact heading">
+        <h3>GET IN TOUCH WITH US</h3>
+        <p>Contact us for any enquiry or suggestion. Thank you!</p> 
+    </div>
+    <div class="socials">
+        <a class="call" href="#">
+            <i class="fa fa-phone-alt"></i>
+        </a>
+        <a class="whatsapp" href="#">
+            <i class="fa fa-whatsapp"></i>
+        </a>
+        <a class="gmail" href="#">
+            <i class="fa fa-envelope"></i>
+        </a>
+        <a class="location" href="#">
+            <i class="fa fa-map-marker-alt"></i>
+        </a>
+    </div>
+   <form action="" method="post" class="contactForm">
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email"/>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message"></textarea>
+        </div>
+        <div className="buttonLink">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+  </form>
+</div>
+
+<%- include('../_layouts/footer.ejs') %>

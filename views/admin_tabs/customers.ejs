@@ -1,0 +1,132 @@
+<div class="dashCont">
+    <div class="cardContDash row">
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>ADD</h6>
+                <div class="rec">
+                    <span>Create Record</span>
+                    <a data-toggle="modal" data-target=".bd-example1-modal-lg">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF USERS</h6>
+                <div class="parc">
+                    <span>
+                      <%= customers.length %>
+                    </span>
+                    <i class="fa fa-users"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF TRAVELLERS</h6>
+                <div class="parc">
+                    <span>
+                      <%= travellers.length %>
+                    </span>
+                    <i class="fa fa-user-plus"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="customerTable">
+        <div>
+            The table below shows the all the users. Add, Edit or delete any of them.
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Username</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Alter</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% customers.forEach((data)=>{ %>
+                <tr>
+                <th scope="row"> </th>
+                <td><%= data.customerID %></td>
+                <td><%= data.firstname %></td>
+                <td><%= data.lastname %></td>
+                <td><%= data.username %></td>
+                <td><%= data.phonenumber %></td>
+                <td><img src="/<%= data.photo %>" alt="profile" width="25px" height="25px"></td>
+                <td>
+                    <a data-toggle="modal" data-target=".bd-example2-modal-lg">Edit</a>
+                </td>
+                <td>
+                  <a href="/admin/pages/delete/customer/<%= data.customerID %>">Delete</a>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+        </table>
+        <!--Modals-->
+        <div class="modal fade bd-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLongTitle">Add Record</h4>
+                </div>
+                <div><b>User HAS to register through the website!</b></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example2-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLongTitle">Edit Details</h4>
+                </div>
+                <form method="post" action="/admin/pages/edit/customer" class="regform" enctype="application/json">
+                    <div class="form-group">
+                        <label>Firstname</label>
+                        <input type="text" name="fName" class="form-control">
+                    </div>
+                  
+                    <div class="form-group">
+                        <label>Lastname</label>
+                        <input type="text" name="lName" class="form-control">
+                    </div>
+              
+                    <div class="form-group">
+                      <label>Username</label>
+                      <input type="text" name="username" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label>Email (original)</label>
+                      <input type="email" name="email" class="form-control">
+                    </div>
+        
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" name="phoneNumber" class="form-control">
+                    </div>
+              
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

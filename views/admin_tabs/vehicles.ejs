@@ -1,0 +1,149 @@
+<div class="dashCont">
+    <div class="cardContDash row">
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>ADD</h6>
+                <div class="rec">
+                    <span>Create Record</span>
+                    <a data-toggle="modal" data-target=".bd-example1-modal-lg">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF BUSES</h6>
+                <div class="parc">
+                    <span>
+                        <%= bus %>
+                    </span>
+                    <i class="fa fa-bus"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card cardi2">
+            <div class="card-body">
+                <h6>NUMBER OF VANS</h6>
+                <div class="parc">
+                    <span>
+                        <%= truck %>
+                    </span>
+                    <i class="fa fa-truck"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vehicleTable">
+        <div>
+            The table below shows the all the vehicles. Add, Edit or delete any of them.
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Make</th>
+                <th scope="col">Type</th>
+                <th scope="col">Plate</th>
+                <th scope="col">Status</th>
+                <th scope="col">Alter</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% vehicles.forEach((data)=>{ %>
+                    <tr>
+                        <th scope="row"> </th>
+                        <td><%= data.vehicleID %></td>
+                        <td><%= data.make %></td>
+                        <td><%= data.type %></td>
+                        <td><%= data.numberplate %></td>
+                        <td><%= data.status %></td>
+                        <td>
+                            <a data-toggle="modal" data-target=".bd-example2-modal-lg">Edit</a>
+                        </td>
+                        <td>
+                            <a href="/admin/pages/vehicle/<%= data.vehicleID %>">Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <!--Modals-->
+        <div class="modal fade bd-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLongTitle">Add Record</h4>
+                </div>
+                <form method="post" action="/admin/pages/add/vehicles" class="regform" enctype="application/json">
+                    <div class="form-group">
+                        <label>Make</label>
+                        <input type="text" name="make" class="form-control">
+                    </div>
+                  
+                    <div class="form-group">
+                        <label>Type</label>
+                        <input type="text" name="type" class="form-control">
+                    </div>
+              
+                    <div class="form-group">
+                        <label>Plate</label>
+                        <input type="text" name="plate" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-select" aria-label="Default select example" name="status">
+                            <option selected>Choose status</option>
+                            <option value="On field">On Field</option>
+                            <option value="maintainance">Maintainance</option>
+                        </select>
+                    </div>
+              
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example2-modal-lg" tabindex="-1" role="dialog" aria-labelledby="revenue" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLongTitle">Edit Details</h4>
+                </div>
+                <form method="post" action="/admin/pages/edit/vehicles" class="regform" enctype="application/json">
+                    <div class="form-group">
+                        <label>Plate(original)</label>
+                        <input type="text" name="plate" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-select" aria-label="Default select example" name="status">
+                            <option selected>Choose status</option>
+                            <option value="On field">On Field</option>
+                            <option value="maintainance">Maintainance</option>
+                        </select>
+                    </div>
+              
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var vehicles = '<%= vehicles %>';
+    console.log(vehicles[0])
+</script>

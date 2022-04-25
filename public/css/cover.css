@@ -1,0 +1,331 @@
+
+.containerTotal{
+    width: 100%;
+    height: auto;
+}
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: gray;
+}
+.navbar{
+    margin-bottom: 0 !important;
+    border-radius: 0;
+}
+@font-face {
+    font-family: candy;
+    src: url('../fonts/OpenSans.ttf');
+}
+.navbar-brand{
+    font-size: 25px;
+}
+.navbar-brand span:nth-child(1){
+    color: red;
+    font-family: candy;
+}
+.navbar-brand span:nth-child(2){
+    color: white;
+    font-family: candy;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+/*
+ * Cover
+ */
+.cover {
+    padding: 0 1.5rem;
+    background-color: #333;
+    color: white;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: url('/images/tms1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.cover .btn-lg {
+    padding: .75rem 1.25rem;
+    font-weight: 700;
+}
+.cover-heading{
+    font-size: 30px;
+    font-weight: bold;
+}
+.cover-heading span:nth-child(1){
+    color: red;
+    font-family: candy;
+}
+.cover-heading span:nth-child(2){
+    color: white;
+    font-family: candy;
+}
+.contCover{
+    width: 60%;
+    text-align: center;
+    padding-top: 80px;
+}
+.text-center span:nth-child(1){
+    color: red;
+    font-family: candy;
+}
+.text-center span:nth-child(2){
+    color: white;
+    font-family: candy;
+}
+  
+
+
+/*Services page*/
+.card-body{
+    padding: 20px;
+}
+
+/*Account page*/
+.profImg{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+.profile-usertitle-name{
+    text-align: center;
+    width: 60px;
+}
+.profile-usertitle-job{
+    text-align: center;
+    width: 60px;
+}
+.reviews{
+    margin-top: 90px;
+    margin-bottom: 40px;
+}
+.reviews .card{
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+}
+.reviews .card-text{
+    font-family: sans-serif;
+    font-style: italic;
+}
+.quote{
+    color: blue;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+
+/*Contact us page*/
+.heading{
+    text-align: center;
+    padding: 40px 0 50px 0;
+}
+.socials{
+    background: url('/images/about1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+.socials a i{
+    font-size: 30px;
+    color: cyan;
+}
+
+.contactForm{
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+.contactForm div{
+    margin-bottom: 10px;
+}
+.messageUs{
+    margin: auto;
+    margin-top: 40px;
+    width: 40%;
+    margin-bottom: 50px;
+}
+.buttonLink{
+    text-align: center;
+}
+
+/*Register page*/
+.regform{
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+
+/*Login page*/
+.logTitle{
+    margin-left: 10%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.loginform{
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    height: 400px;
+}
+
+/*account section*/
+.accSec{
+    margin-top: 10px;
+}
+.prof{
+    width: 80%;
+    margin: auto;
+    padding: 15px;
+    position: relative;
+    border: 1px solid gainsboro;
+    border-radius: 4px;
+}
+.img-responsive{
+    border-radius: 50%;
+}
+.profile-userbtns{
+    top: 20px;
+    position: absolute;
+    right: 5%;
+}
+.accServices{
+    margin-top: 60px;
+}
+.accServices h3{
+    padding-left: 12%;
+    font-family: cursive;
+    margin-bottom: 20px;
+}
+.card-img-top{
+    width: 100%;
+    height: 200px;
+}
+.tracking{
+    margin-top: 30px;
+}
+.tracking h3{
+    margin-left: 0;
+}
+.containerTbls{
+    border: 1px solid gainsboro;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.containerTbls h4{
+    background-color: rgb(238, 238, 238);
+    padding: 4px;
+    color: rgb(1, 119, 119);
+}
+.cardTr{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.10rem
+}
+.card-header:first-child {
+    border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+}
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+}
+.track {
+    position: relative;
+    background-color: #dde;
+    height: 7px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 60px;
+    margin-top: 50px
+}
+.track .step {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 25%;
+    margin-top: -18px;
+    text-align: center;
+    position: relative
+}
+.track .step.active:before {
+    background: #FF5722
+}
+.track .step::before {
+    height: 7px;
+    position: absolute;
+    content: "";
+    width: 100%;
+    left: 0;
+    top: 18px
+}
+.track .step.active .icon {
+    background: #ee5435;
+    color: #fff
+}
+.track .icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    border-radius: 100%;
+    background: #ddd
+}
+.track .step.active .text {
+    font-weight: 400;
+    color: #000
+}
+.track .text {
+    display: block;
+    margin-top: 7px
+}
+.accRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.accLead{
+    text-align: center;
+}
+
+
+
+
+/*Footer section*/
+footer{
+    background-color: rgb(39, 39, 39);
+    color: white;
+    padding: 30px;
+}

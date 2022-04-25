@@ -1,0 +1,109 @@
+/*Dashboard*/
+.modal-backdrop {
+    z-index: 0;
+}
+.dashCont{
+    width: 100%;
+    margin-top: 40px;
+}
+.cardContDash{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.cardi{
+    width: 30%;
+    background-color: rgb(240, 240, 240);
+    border-left: 3px solid blue;
+    border-radius: 5px;
+}
+.cardi h6{
+    color: rgb(41, 41, 252);
+    font-weight: bold;
+}
+.cardi i{
+    float: right;
+    font-size: 20px;
+    color: gray;
+}
+.graphCont{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    column-gap: 5%;
+}
+
+.barGraph{
+    width: 55%;
+}
+.pieGraph{
+    width: 40%;
+}
+.graphCont2{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    column-gap: 10%;
+}
+.cardContDash4{
+    display: flex;
+    flex-flow: column;
+    width: 30%;
+    row-gap: 10px;
+}
+.cardi3{
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    border-left: 3px solid red;
+    border-radius: 5px;
+}
+.cardi3 h6{
+    color: rgb(41, 41, 252);
+    font-weight: bold;
+}
+.cardi3 i{
+    float: right;
+    font-size: 20px;
+    color: gray;
+}
+.lineGraph{
+    width: 60%;
+}
+
+/*Jobs*/
+.cardi2{
+    width: 30%;
+    background-color: rgb(240, 240, 240);
+    border-left: 3px solid rgb(1, 168, 1);
+    border-radius: 5px;
+}
+.cardi2 h6{
+    color: rgb(41, 41, 252);
+    font-weight: bold;
+}
+.cardi2 i{
+    float: right;
+    font-size: 20px;
+    color: gray;
+}
+.jobTable{
+    width: 100%;
+}
+.jobTable div{
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: calibri;
+}
+.jobTable table{
+    border: 1px solid rgb(233, 232, 232);
+    border-radius: 10px;
+}
+
+/*Drivers*/
+.cardContDash2{
+    display: flex;
+    flex-flow: row;
+    column-gap: 30px;
+    margin-bottom: 50px;
+}
