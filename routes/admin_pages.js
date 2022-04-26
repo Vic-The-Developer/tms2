@@ -158,9 +158,9 @@ router.get('/', function (req, res) {
                                                 if(err) throw err;
                                                 var resu = result;
                                                 result.forEach((data)=>{
-                                                    routes.push(data.routeFrom,data.routeTo);
-                                                    console.log('Routes:',routes);
+                                                    routes.push(data);
                                                 })
+                                                console.log('Routes:',routes);
 
                                                 if(res.locals.user===null){
                                                     res.render('main_pages/about',{
@@ -312,6 +312,7 @@ router.get('/delete/job/:id', function (req, res) {
         if(err) throw err;
         console.log(result);
         req.flash('success', 'Record Deleted!');
+        res.redirect('/admin/pages');
     })
 });
 
@@ -323,7 +324,7 @@ router.post('/job/status', (req,res)=>{
     var status = req.body.status;
     var receipt = req.body.receipt;
 
-    Parcels.updateOne({receipt: receipt}, {$set: {status: status}}, (err, result)=>{
+    Parcels.updateOne({receiptId: receipt}, {$set: {status: status}}, (err, result)=>{
         if(err){
             console.log(err);
             req.flash('danger', 'Could not update status!');
@@ -361,6 +362,7 @@ router.post('/add/driver', function (req, res) {
         db.query(sql,values, (err, result)=>{
             if(err) throw err;
             console.log(result);
+            res.redirect('/admin/pages');
         })
     });
 
@@ -378,13 +380,15 @@ router.post('/edit/drivers', (req,res)=>{
     db.query(sql,values,(err, result)=>{
         if(err){
             console.log(err);
-            res.flash('error', "Did not update record!")
+            res.flash('error', "Did not update record!");
+            res.redirect('/admin/pages');
         };
         console.log(result);
         res.flash('success', 'Record is updated!');
+        res.redirect('/admin/pages');
     })
 })
-router.post('/delete/driver/:id', (req, res)=>{
+router.get('/delete/driver/:id', (req, res)=>{
 
     var driverID = req.params.id;
 
@@ -392,6 +396,7 @@ router.post('/delete/driver/:id', (req, res)=>{
     db.query(sql,driverID, (err, result)=>{
         if(err) throw err;
         console.log(result);
+        res.redirect('/admin/pages');
     })
 })
 /*
@@ -415,37 +420,40 @@ router.post('/edit/customer', (req,res)=>{
         };
         console.log(result);
         res.flash('success', 'Record is updated!');
+        res.redirect('/admin/pages');
     })
 })
-router.post("/delete/customer/:id", (req, res)=>{
+router.get("/delete/customer/:id", (req, res)=>{
 
     var id = req.params.id;
     var sql = `DELETE FROM customers WHERE customerID=?;`;
     db.query(sql,id, (err, result)=>{
         if(err) throw err;
         console.log(result);
+        res.redirect('/admin/pages')
     })
 })
 
 /**
  * TRAVELLERS
  */
-router.post('/check/traveller/:id', (req, res)=>{
+router.get('/check/traveller/:id', (req, res)=>{
 
     var id = req.params.id;
     Travellers.findOneAndUpdate({ticketNumber: id}, {$set:{status:"checked"}}, (err,result)=>{
         if(err) throw err;
         console.log(result);
-        res.flash('success', "Traveller checked!")
+        res.redirect("/admin/pages");
     })
 })
-router.post('/delete/traveller/:id', (req, res)=>{
+router.get('/delete/traveller/:id', (req, res)=>{
 
     var id = req.params.id;
     Travellers.deleteOne({ticketNumber: id}, (err, result)=>{
         if(err) throw err;
         console.log(result);
-        res.flash('success', 'Record deleted!')
+        
+        res.redirect('/admin/pages');
     })
 })
 /**
@@ -465,7 +473,8 @@ router.post('/add/vehicle', (req,res)=>{
     db.query(sql,values, (err, result)=>{
         if(err) throw err;
         console.log(result);
-        res.flash('success', "Record inserted sucessfully!");
+        
+        res.redirect('/admin/pages');
     })
 })
 router.post('/edit/vehicle', (req, res)=>{
@@ -484,9 +493,10 @@ router.post('/edit/vehicle', (req, res)=>{
         }
         console.log(result);
         req.flash('success', 'Record updated sucessfully!');
+        res.redirect('/admin/pages')
     })
 })
-router.post('/delete/vehicle/:id', (req, res)=>{
+router.get('/delete/vehicle/:id', (req, res)=>{
 
     var id = req.params.id;
     var sql = `DELETE FROM vehicles WHERE vehicleID=?;`;
@@ -494,9 +504,11 @@ router.post('/delete/vehicle/:id', (req, res)=>{
         if(err){
             console.log(err);
             req.flash('danger', 'Record nor deleted!');
+            res.redirect('/admin/pages');
         }
         console.log(result);
         req.flash('sucess', 'Record deleted sucessfully!');
+        res.redirect('/admin/pages')
     })
 })
 /**
@@ -532,9 +544,10 @@ router.post('/add/hire', (req, res)=>{
         }
         console.log(result);
         req.flash('success', 'Record entered sucessfully!');
+        res.redirect('/admin/pages')
     })
 })
-router.post('/hire/check/:id', (req, res)=>{
+router.get('/hire/check/:id', (req, res)=>{
 
     var id = req.params.id;
     var sql = `UPDATE carhire SET check=? WHERE plate=?;`;
@@ -542,13 +555,15 @@ router.post('/hire/check/:id', (req, res)=>{
     db.query(sql, values, (err, result)=>{
         if(err){
             console.log(err);
-            req.flash('danger', 'Could not check!')
+            req.flash('danger', 'Could not check!');
+            res.redirect('/admin/pages')
         }
         console.log(result);
         req.flash('success', 'Checked successfully!');
+        res.redirect('/admin/pages');
     })
 })
-router.post('/hire/delete/:id', (req, res)=>{
+router.get('/hire/delete/:id', (req, res)=>{
 
     var id = req.params.id;
     var sql = `DELETE FROM carhire WHERE plate=?;`;
@@ -556,9 +571,11 @@ router.post('/hire/delete/:id', (req, res)=>{
         if(err){
             console.log(err);
             req.flash('danger', "Could not delete record!");
+            res.redirect('/admin/pages')
         }
         console.log(result);
         req.flash('success', 'Record deleted successfully!');
+        res.redirect('/admin/pages');
     })
 })
 /**
@@ -576,14 +593,15 @@ router.post('/add/route', (req, res)=>{
         if(err){
             console.log(err);
             req.flash('danger', 'Record not inserted!');
+            res.redirect('/admin/pages');
         }
         console.log(result);
         req.flash('success','Record inserted successfully!');
-        res.redirect('/admin/pages')
+        res.redirect('/admin/pages');
     })
 
 })
-router.post('/delete/route/:id', (req, res)=>{
+router.get('/delete/route/:id', (req, res)=>{
 
     var id = req.params.id;
     var sql = `DELETE FROM routes WHERE id=?;`;
@@ -591,9 +609,11 @@ router.post('/delete/route/:id', (req, res)=>{
         if(err){
             console.log(err);
             req.flash('danger','Could not remove!');
+            res.redirect('/admin/pages')
         }
         console.log(result);
         req.flash('success', "Record removed successfully!");
+        res.redirect('/admin/pages')
     })
 })
 

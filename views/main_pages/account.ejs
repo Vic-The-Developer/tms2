@@ -317,7 +317,7 @@
         <div class="containerTbls border-right">
             <h4 class="card-header">Parcels</h4>
 
-            <% if (parcel) { %>
+            <% if (parcel.length !== 0) { %>
                 <table class="table table-striped">
                     <thead>
                       <tr>
@@ -399,7 +399,7 @@
         <div class="containerTbls border-right">
             <h4 class="card-header">Travelling</h4>
 
-            <% if(traveller) { %>
+            <% if(traveller.length !== 0 ) { %>
                 <table class="table table-striped">
                     <thead>
                       <tr>
@@ -427,68 +427,70 @@
             <% } %>
 
             <!-- Travel Tracking Modal -->
-            <% traveller.forEach((data)=>{ %>
-                <div class="modal fade" id="<%= data.ticketNumber %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">
-                                Details
-                            </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <article class="card">
-                                    <header class="card-header">Tracking </header>
-                                    <div class="card-body">
-                                        <h6>Customer ID: <%= data.customerID %></h6>
-                                        <article class="card">
-                                            <div class="card-body accRow row">
-                                                <div class="col"> <strong>Departure time:</strong> <br><%= data.arrival %></div>
-                                                <div class="col"> <strong>Number plate:</strong> <br> KAA.124 </div>
-                                                <div class="col"> <strong>Status:</strong> <br> <%= data.status %> </div>
-                                                <div class="col"> <strong>Receipt #:</strong> <br> <%= data.ticketNumber %> </div>
+            <% if(traveller.length !==0){ %>
+                <% traveller.forEach((data)=>{ %>
+                    <div class="modal fade" id="<%= data.ticketNumber %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">
+                                    Details
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <article class="card">
+                                        <header class="card-header">Tracking </header>
+                                        <div class="card-body">
+                                            <h6>Customer ID: <%= data.customerID %></h6>
+                                            <article class="card">
+                                                <div class="card-body accRow row">
+                                                    <div class="col"> <strong>Departure time:</strong> <br><%= data.arrival %></div>
+                                                    <div class="col"> <strong>Number plate:</strong> <br> KAA.124 </div>
+                                                    <div class="col"> <strong>Status:</strong> <br> <%= data.status %> </div>
+                                                    <div class="col"> <strong>Receipt #:</strong> <br> <%= data.ticketNumber %> </div>
+                                                </div>
+                                            </article>
+                                            <div class="track">
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Pending</span> </div>
+                                                <% if(data.status==='on board') { %>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">On-board</span> </div>
+                                                <% } else { %>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">On-board</span> </div>
+                                                <% } %>
+                                                
+                                                <% if(data.status==='arrived') { %>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-bus"></i> </span> <span class="text"> Arrived </span> </div>
+                                                <% } else{ %>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-bus"></i> </span> <span class="text"> Arrived </span> </div>
+                                                <% } %>
+                                                
                                             </div>
-                                        </article>
-                                        <div class="track">
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Pending</span> </div>
-                                            <% if(data.status==='on board') { %>
-                                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">On-board</span> </div>
-                                            <% } else { %>
-                                                <div class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">On-board</span> </div>
-                                            <% } %>
-                                            
-                                            <% if(data.status==='arrived') { %>
-                                                <div class="step active"> <span class="icon"> <i class="fa fa-bus"></i> </span> <span class="text"> Arrived </span> </div>
-                                            <% } else{ %>
-                                                <div class="step"> <span class="icon"> <i class="fa fa-bus"></i> </span> <span class="text"> Arrived </span> </div>
-                                            <% } %>
-                                            
+                                            <hr>
+                                            <span class="row">
+                                                <h5>Make payment</h5><br/>
+                                                <div class='mpesaButtons' data-phone='<%= user[0].phonenumber %>' data-amount=3000 data-url='/users/mpesa/pay'></div>
+                                            </span>
                                         </div>
-                                        <hr>
-                                        <span class="row">
-                                            <h5>Make payment</h5><br/>
-                                            <div class='mpesaButtons' data-phone='<%= user[0].phonenumber %>' data-amount=3000 data-url='/users/mpesa/pay'></div>
-                                        </span>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                Close
-                            </button>
+                                    </article>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-           <% }) %>
+               <% }) %>
+            <% } %>
         </div>
         <div class="containerTbls border-right">
             <h4 class="card-header">Car/Bus Hire</h4>
 
-            <% if(carHire===undefined || carHire===null){ %>
+            <% if(carHire.length === 0){ %>
                 <p class="lead accLead text-muted">
                     You don't have any booked vehicles.
                 </p>

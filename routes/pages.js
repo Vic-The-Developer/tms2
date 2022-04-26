@@ -50,35 +50,47 @@ router.get('/account', (req,res)=>{
         var parcel = [];
         var traveller = [];
         var carHire = [];
+        console.log(res.locals.user[0])
 
         Parcels.findOne({customerId: id}, (err, result)=>{
             if(err) throw err;
             console.log(result);
-            parcel.push(result);
+            if(result !== null){
+                parcel.push(result);
+            } else{
+                parcel = [];
+            }
+            
+            console.log('parcel', parcel);
 
-            parcel.forEach((data)=>{
+            // if(parcel){
+            //     parcel.forEach((data)=>{
+            
+            //         if(data.status==='pick up'){
+            //             const mailOptions = {
+            //                 from: 'victormutua71@gmail.com', // sender address
+            //                 to: res.locals.user[0].email, // list of receivers
+            //                 subject: 'Subject of your email', // Subject line
+            //                 html: '<p>Your html here</p>'// plain text body
+            //             };
+            //             transporter.sendMail(mailOptions, function (err, info) {
+            //                 if(err)
+            //                 console.log(err)
+            //                 else
+            //                 console.log('Success mailing', info);
+            //                 Parcels.findOneAndUpdate({_id: data._id}, {$set: {mailed: 'mailed'}}, (err, resultMail)=>{
+            //                     if(err) throw err;
+            //                     console.log('Mailed result', resultMail);
+            //                 })
+            //             });
+            //         } else {
+            //             console.log('Mail was sent!')
+            //         }
+            //     })
+            // } else{
+            //     console.log('No parcels available!')
                 
-                if(data.mailed===null || data.mailed===undefined && data.status==='pick up'){
-                    const mailOptions = {
-                        from: 'victormutua71@gmail.com', // sender address
-                        to: res.locals.user[0].email, // list of receivers
-                        subject: 'Subject of your email', // Subject line
-                        html: '<p>Your html here</p>'// plain text body
-                    };
-                    transporter.sendMail(mailOptions, function (err, info) {
-                        if(err)
-                        console.log(err)
-                        else
-                        console.log('Success mailing', info);
-                        Parcels.findOneAndUpdate({_id: data._id}, {$set: {mailed: 'mailed'}}, (err, resultMail)=>{
-                            if(err) throw err;
-                            console.log('Mailed result', resultMail);
-                        })
-                    });
-                } else {
-                    console.log('Mail was sent!')
-                }
-            })
+            // }
             
 
             var sql1 = `SELECT * FROM routes;`;
@@ -88,16 +100,25 @@ router.get('/account', (req,res)=>{
 
                 Travellers.findOne({customerID: id}, (err, result)=>{
                     if(err) throw err;
-                    traveller.push(result);
+                    if(result !== null){
+                        traveller.push(result);
+                    } else{
+                        traveller = []
+                    }
                     console.log('Traveller',result)
 
                     var sql2 = `SELECT * FROM carhire WHERE customerID=?;`;
                     db.query(sql2, id, (err, result)=>{
                         if(err) throw err;
                         console.log(result);
-                        result.forEach((data)=>{
-                            carHire.push(data);
-                        })
+                        if(result !== null){
+                           result.forEach((data)=>{
+                             carHire.push(data);
+                            }) 
+                        } else{
+                            carHire = []
+                        }
+                        
                         
 
                         console.log("Routes",routes)

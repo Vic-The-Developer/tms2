@@ -62,16 +62,16 @@ router.post('/register', function (req, res) {
             title: 'Register'
         });
     } else {
-        console.log("Im awesome")
+        console.log(req.body);
 
         var sql = `SELECT * FROM customers WHERE email = ? OR username = ?;`;
         var email = req.body.email;
-        
+
         var username = req.body.username;
         db.query(sql,[email,username], (err,user)=>{
             console.log(user);
             
-            if(user){
+            if(user.length!==0){
                 console.log("User already exists!");
                 req.flash('danger', 'Username exists, choose another!');
                 res.redirect('/users/register');
