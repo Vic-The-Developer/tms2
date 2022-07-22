@@ -10,14 +10,14 @@ var transporter = nodemailer.createTransport({
  service: 'gmail',
  auth: {
         user: 'victormutua71@gmail.com',
-        pass: 'vic0710443487'
+        pass: ''
     }
 });
 
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '/victor.mwendwa.18/',
+    password: '',
     database: 'tms'
 })
 
