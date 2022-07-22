@@ -12,7 +12,7 @@ var Travellers = require("../models/travellers");
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '/victor.mwendwa.18/',
+    password: '',
     database: 'tms'
 })
 
